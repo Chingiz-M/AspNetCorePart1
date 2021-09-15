@@ -8,7 +8,7 @@ namespace AspNetCoreProject.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index() => Content("FFF");
+        public IActionResult Index() => View();
         public IActionResult SecondAction() => Content("SSS");
     }
 }
