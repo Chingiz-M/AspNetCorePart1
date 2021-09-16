@@ -11,8 +11,8 @@ namespace AspNetCoreProject.Controllers
     {
         private static readonly List<Employee> employees = new List<Employee>()
         {
-            new Employee(1,"Ivan","Ivanov","Ivanovich",19),
-            new Employee(1,"Petr","Petrov","Petrovich",32)
+            new Employee(1,"Ivan","Ivanov","Ivanovich",19,new DateTime(2002,12,3), "5 лет"),
+            new Employee(2,"Petr","Petrov","Petrovich",31,new DateTime(1990,11,4), "6 лет")
         };
         public IActionResult Index() => View();
         public IActionResult SecondAction() => Content("SSS");
