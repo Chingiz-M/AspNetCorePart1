@@ -1,16 +1,7 @@
 ﻿@model List<AspNetCoreProject.Models.Employee>
 
-<!DOCTYPE html>
-<html>
-
-<head>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сотрудники</title>
-</head>
-
-<body>
-    <table>
+<div class="container">
+    <table class="table">
         <caption><b>Сотрудники</b></caption>
         <thead>
             <tr>
@@ -24,10 +15,10 @@
         <tbody>
             @foreach(var employee in Model)
             {
-                if(employee.Age == 32)
-                {
-                    int a = 0;
-                }
+            if(employee.Age == 32)
+            {
+            int a = 0;
+            }
             <tr>
                 <td>@employee.Id</td>
                 <td>@employee.Lastname</td>
@@ -40,8 +31,6 @@
 
     </table>
     <p>
-        <a href="/">Home</a>
+        <a asp-controller="home" asp-action="index">Home</a>
     </p>
-</body>
-
-</html>
+</div>
