@@ -1,21 +1,18 @@
-﻿using AspNetCoreProject.Models;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreProject.Controllers
 {
     public class HomeController : Controller
     {
-        private static readonly List<Employee> employees = new List<Employee>()
-        {
-            new Employee(1,"Ivan","Ivanov","Ivanovich",19,new DateTime(2002,12,3), "5 лет"),
-            new Employee(2,"Petr","Petrov","Petrovich",31,new DateTime(1990,11,4), "6 лет")
-        };
         public IActionResult Index() => View();
-        public IActionResult SecondAction() => Content("SSS");
-        public IActionResult Employees() => View(employees);
+        public IActionResult Error404() => View();
+        public IActionResult Blog() => View();
+        public IActionResult BlogSingle() => View();
+        public IActionResult Cart() => View();
+        public IActionResult Checkout() => View();
+        public IActionResult ContactUs() => View();
+        public IActionResult Login() => View();
+        public IActionResult ProductDetails() => View();
+        public IActionResult Shop() => View();
     }
 }
