@@ -25,6 +25,9 @@
                 <td>@employee.Name</td>
                 <td>@employee.Surname</td>
                 <td>@employee.Age</td>
+                <td>
+                    <a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id">info</a>
+                </td>
             </tr>
             }
         <tbody>

@@ -2,6 +2,7 @@
 using AspNetCoreProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AspNetCoreProject.Controllers
 {
@@ -14,5 +15,15 @@ namespace AspNetCoreProject.Controllers
         }
 
         public IActionResult Index() => View(_Employees);
+
+        public IActionResult Details(int id)
+        {
+            var employee = _Employees.SingleOrDefault(e => e.Id == id);
+
+            if (employee == null)
+                return NotFound();
+
+            return View(employee);
+        }
     }
 }
