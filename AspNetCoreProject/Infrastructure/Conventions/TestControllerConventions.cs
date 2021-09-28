@@ -10,7 +10,7 @@ namespace AspNetCoreProject.Infrastructure.Conventions
     {
         public void Apply(ControllerModel controller)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
