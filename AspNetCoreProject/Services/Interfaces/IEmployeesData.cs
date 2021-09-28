@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AspNetCoreProject.Services.Interfaces
 {
-    interface IEmployeesData
+    public interface IEmployeesData
     {
         IEnumerable<Employee> GetAll();
         Employee GetById(int id);
