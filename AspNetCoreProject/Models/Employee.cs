@@ -15,15 +15,13 @@ namespace AspNetCoreProject.Models
         public DateTime Birthday { get; set; }
         public string Experience { get; set; }
 
-        public Employee(int id, string name, string lastname, string surname, int age, DateTime birthday, string experience)
+        public Employee(int id, string name, string lastname, string surname, int age)
         {
             Id = id;
             Name = name;
             Lastname = lastname;
             Surname = surname;
             Age = age;
-            Birthday = birthday;
-            Experience = experience;
         }
     }
 }

@@ -1,3 +1,7 @@
+using AspNetCoreProject.Infrastructure.Conventions;
+using AspNetCoreProject.Infrastructure.MiddleWare;
+using AspNetCoreProject.Services.Interfaces;
+using AspNetCoreProject.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,14 +15,12 @@ namespace AspNetCoreProject
     {
         public IConfiguration Configuration { get; set; }
 
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            services.AddControllersWithViews(opt => opt.Conventions.Add(new TestControllerConventions())).AddRazorRuntimeCompilation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -28,7 +30,10 @@ namespace AspNetCoreProject
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
+
             app.UseRouting();
+
+            app.UseMiddleware<TestMiddleWare>();
 
             app.UseEndpoints(endpoints =>
             {
