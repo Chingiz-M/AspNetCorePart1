@@ -1,5 +1,7 @@
 using AspNetCoreProject.Infrastructure.Conventions;
 using AspNetCoreProject.Infrastructure.MiddleWare;
+using AspNetCoreProject.Services.Interfaces;
+using AspNetCoreProject.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +19,7 @@ namespace AspNetCoreProject
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddControllersWithViews(opt => opt.Conventions.Add(new TestControllerConventions())).AddRazorRuntimeCompilation();
         }
 
