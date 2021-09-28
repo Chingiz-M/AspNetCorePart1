@@ -1,3 +1,4 @@
+using AspNetCoreProject.Infrastructure.MiddleWare;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,10 +12,7 @@ namespace AspNetCoreProject
     {
         public IConfiguration Configuration { get; set; }
 
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -28,7 +26,10 @@ namespace AspNetCoreProject
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
+
             app.UseRouting();
+
+            app.UseMiddleware<TestMiddleWare>();
 
             app.UseEndpoints(endpoints =>
             {
