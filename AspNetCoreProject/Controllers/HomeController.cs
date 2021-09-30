@@ -12,5 +12,7 @@ namespace AspNetCoreProject.Controllers
         public IActionResult Login() => View();
         public IActionResult ProductDetails() => View();
         public IActionResult Shop() => View();
+        public IActionResult StatusCode(string Code) => Content($"Status code - {Code}");
+
     }
 }
