@@ -53,6 +53,11 @@ namespace AspNetCoreProject.Controllers
         [HttpPost]
         public IActionResult Edit(EmployeeViewModel model)
         {
+            if (model.Age == 18 && model.Name == "Name")
+                ModelState.AddModelError("", "Низя так");
+            
+            if (!ModelState.IsValid) return View(model);
+
             var employee = new Employee(model.Id, model.Name, model.Surname, model.Lastname, model.Age);
             if (employee.Id == 0)
                 employeesData.Add(employee);
