@@ -8,6 +8,6 @@ namespace AspNetCoreProject.Domain.Entities.Base.Interfaces
 {
     public interface IEntity
     {
-        int ID { get; }
+        int Id { get; }
     }
 }

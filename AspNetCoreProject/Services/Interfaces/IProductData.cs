@@ -6,7 +6,7 @@ using AspNetCoreProject.Domain.Entities;
 
 namespace AspNetCoreProject.Services.Interfaces
 {
-    interface IProductData
+    public interface IProductData
     {
         IEnumerable<Section> GetSections(); 
         IEnumerable<Brand> GetBrands();
