@@ -52,7 +52,6 @@ namespace AspNetCoreProject.Services
             update_employee.Lastname = employee.Lastname;
             update_employee.Surname = employee.Surname;
             update_employee.Age = employee.Age;
-            update_employee.Birthday = employee.Birthday;
         }
     }
 }

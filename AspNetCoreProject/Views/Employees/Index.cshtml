@@ -2,7 +2,7 @@
 
 <div class="container">
     <p>
-        <a asp-action="Create" class="btn"> Создать</a>
+        <a asp-action="Create" class="btn-default"> Создать</a>
     </p>
 
     @if (Model.Any()) 
@@ -21,10 +21,6 @@
             <tbody>
                 @foreach (var employee in Model)
                 {
-                    if (employee.Age == 32)
-                    {
-                        int a = 0;
-                    }
                     <tr>
                         <td>@employee.Id</td>
                         <td>@employee.Lastname</td>
