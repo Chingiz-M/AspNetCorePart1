@@ -11,5 +11,6 @@ namespace AspNetCoreProject.ViewModels
         public string Name { get; set; }
         public string Lastname { get; set; }
         public string Surname { get; set; }
+        public int Age { get; set; }
     }
 }

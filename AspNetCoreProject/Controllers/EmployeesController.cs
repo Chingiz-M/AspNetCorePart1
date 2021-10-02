@@ -45,14 +45,15 @@ namespace AspNetCoreProject.Controllers
                 Id = employee.Id,
                 Name = employee.Name,
                 Lastname = employee.Lastname,
-                Surname = employee.Surname
+                Surname = employee.Surname,
+                Age = employee.Age,
             };
             return View(model);
         }
         [HttpPost]
         public IActionResult Edit(EmployeeViewModel model)
         {
-            var employee = new Employee(model.Id, model.Name, model.Surname, model.Lastname, 10);
+            var employee = new Employee(model.Id, model.Name, model.Surname, model.Lastname, model.Age);
             if (employee.Id == 0)
                 employeesData.Add(employee);
             else
@@ -73,7 +74,8 @@ namespace AspNetCoreProject.Controllers
                 Id = employee.Id,
                 Name = employee.Name,
                 Lastname = employee.Lastname,
-                Surname = employee.Surname
+                Surname = employee.Surname,
+                Age = employee.Age,
             });
         }
         [HttpPost]
