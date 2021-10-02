@@ -3,7 +3,7 @@ using AspNetCoreProject.Domain.Entities.Base.Interfaces;
 
 namespace AspNetCoreProject.Domain.Entities
 {
-    class Brand : NamedEntity, IOrderedEntity
+    public class Brand : NamedEntity, IOrderedEntity
     {
         public int Order { get; set; }
     }

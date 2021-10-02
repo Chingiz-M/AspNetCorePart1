@@ -2,7 +2,7 @@
 
 namespace AspNetCoreProject.Domain.Entities.Base
 {
-    class NamedEntity : Entity, INamedEntity
+    public abstract class NamedEntity : Entity, INamedEntity
     {
         public string Name { get; set; }
     }

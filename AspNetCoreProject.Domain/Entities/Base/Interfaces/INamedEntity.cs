@@ -1,6 +1,6 @@
 ﻿namespace AspNetCoreProject.Domain.Entities.Base.Interfaces
 {
-    interface INamedEntity : IEntity
+    public interface INamedEntity : IEntity
     {
        string Name { get; }
     }

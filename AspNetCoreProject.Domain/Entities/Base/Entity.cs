@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreProject.Domain.Entities.Base
 {
-    class Entity : IEntity
+    public abstract class Entity : IEntity
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
     }
 }

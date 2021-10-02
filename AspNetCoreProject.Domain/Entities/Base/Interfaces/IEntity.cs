@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreProject.Domain.Entities.Base.Interfaces
 {
-    interface IEntity
+    public interface IEntity
     {
         int ID { get; }
     }
