@@ -24,6 +24,7 @@ namespace AspNetCoreProject
             services.AddDbContext<WebStoreDB>(opt => opt.UseSqlServer(
                 Configuration.GetConnectionString("SqlServer")));
 
+            services.AddTransient<AspNetCoreProject.Data.ProjectDBInitiolizer>();
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddSingleton<IProductData, InMemoryProductData>();
             services.AddControllersWithViews(opt => opt.Conventions.Add(new TestControllerConventions())).AddRazorRuntimeCompilation();

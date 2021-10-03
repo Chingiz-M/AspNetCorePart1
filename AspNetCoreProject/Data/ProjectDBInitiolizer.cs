@@ -23,6 +23,7 @@ namespace AspNetCoreProject.Data
 
             if (pending_migrations.Any())
                 await db.Database.MigrateAsync();
+            await InitiolizeProductAsync();
         } 
 
         private async Task InitiolizeProductAsync()
