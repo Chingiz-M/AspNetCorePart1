@@ -1,5 +1,6 @@
 ﻿using AspNetCoreProject.DAL.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,17 @@ namespace AspNetCoreProject.Data
     public class ProjectDBInitiolizer
     {
         private readonly WebStoreDB db;
+        private readonly ILogger<ProjectDBInitiolizer> logger;
 
-        public ProjectDBInitiolizer(WebStoreDB db)
+        public ProjectDBInitiolizer(WebStoreDB db, ILogger<ProjectDBInitiolizer> Logger)
         {
             this.db = db;
+            logger = Logger;
         }
 
         public async Task InitiolizeAsync()
         {
+            logger.LogInformation("Запуск инициализации бд");
             var pending_migrations = await db.Database.GetPendingMigrationsAsync();
             var papplied_migrations = await db.Database.GetAppliedMigrationsAsync();
 
@@ -54,6 +58,8 @@ namespace AspNetCoreProject.Data
                 await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] OFF");
                 await db.Database.CommitTransactionAsync();
             }
+            logger.LogInformation("Конец инициализации бд");
+
         }
     }
 }
