@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AspNetCoreProject.DAL\AspNetCoreProject.DAL.csproj" />
     <ProjectReference Include="..\AspNetCoreProject.Domain\AspNetCoreProject.Domain.csproj" />
   </ItemGroup>
 
