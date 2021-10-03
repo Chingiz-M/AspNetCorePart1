@@ -32,6 +32,9 @@ namespace AspNetCoreProject.Data
 
         private async Task InitiolizeProductAsync()
         {
+            if (db.Sections.Any())
+                return;
+
             await using (await db.Database.BeginTransactionAsync())
             {
                 db.Sections.AddRange(TestData.Sections);

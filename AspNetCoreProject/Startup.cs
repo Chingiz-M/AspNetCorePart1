@@ -1,7 +1,6 @@
 using AspNetCoreProject.Infrastructure.Conventions;
 using AspNetCoreProject.Infrastructure.MiddleWare;
 using AspNetCoreProject.Services.Interfaces;
-using AspNetCoreProject.Services;
 using AspNetCoreProject.DAL.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using AspNetCoreProject.Services.InMemory;
+using AspNetCoreProject.Services.InSql;
 
 namespace AspNetCoreProject
 {
@@ -26,7 +27,7 @@ namespace AspNetCoreProject
 
             services.AddTransient<AspNetCoreProject.Data.ProjectDBInitiolizer>();
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
-            services.AddSingleton<IProductData, InMemoryProductData>();
+            services.AddScoped<IProductData, SqlProductData>();
             services.AddControllersWithViews(opt => opt.Conventions.Add(new TestControllerConventions())).AddRazorRuntimeCompilation();
         }
 
