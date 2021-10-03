@@ -1,19 +1,26 @@
-﻿using AspNetCoreProject.Data;
+﻿using AspNetCoreProject.DAL.Context;
 using AspNetCoreProject.Domain;
 using AspNetCoreProject.Domain.Entities;
 using AspNetCoreProject.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AspNetCoreProject.Services
+namespace AspNetCoreProject.Services.InSql
 {
-    public class InMemoryProductData : IProductData
+    public class SqlProductData : IProductData
     {
-        public IEnumerable<Brand> GetBrands() => TestData.Brands;
+        private readonly WebStoreDB db;
+
+        public SqlProductData(WebStoreDB db)
+        {
+            this.db = db;
+        }
+        public IEnumerable<Brand> GetBrands() => db.Brands;
 
         public IEnumerable<Product> GetProducts(ProductFilter filter = null)
         {
-            IEnumerable<Product> products = TestData.Products;
+            IQueryable<Product> products = db.Products;
 
             if (filter?.SectionId != null)
                 products = products.Where(p => p.SectionId == filter.SectionId);
@@ -24,6 +31,6 @@ namespace AspNetCoreProject.Services
             return products;
         }
 
-        public IEnumerable<Section> GetSections() => TestData.Sections;
+        public IEnumerable<Section> GetSections() => db.Sections;
     }
 }

@@ -16,5 +16,7 @@
     @RenderBody()
     <partial name="Partial/_Footer"></partial>
     <partial name="Partial/_Scripts"></partial>
+
+    @await RenderSectionAsync("Scripts", false) 
 </body>
 </html>

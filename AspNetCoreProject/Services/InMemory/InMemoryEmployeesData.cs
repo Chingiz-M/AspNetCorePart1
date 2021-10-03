@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AspNetCoreProject.Services
+namespace AspNetCoreProject.Services.InMemory
 {
     public class InMemoryEmployeesData : IEmployeesData
     {
