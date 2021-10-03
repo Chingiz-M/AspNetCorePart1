@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreProject.DAL.Context
 {
-    class WebStoreDB: DbContext
+    public class WebStoreDB: DbContext
     {
         DbSet<Product> Products { get; set; }
         DbSet<Section> Sections { get; set; }
