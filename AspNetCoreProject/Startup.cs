@@ -30,6 +30,8 @@ namespace AspNetCoreProject
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStatusCodePagesWithRedirects("~/home/Status/{0}");
+
             app.UseStaticFiles();
 
             app.UseRouting();
