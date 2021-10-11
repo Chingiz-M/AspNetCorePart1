@@ -16,7 +16,7 @@ namespace AspNetCoreProject.Controllers
             userManager = UserManager;
             signInManager = SignInManager;
         }
-        public IActionResult Register => View(new RegisterViewModel());
+        public IActionResult Register() => View(new RegisterViewModel());
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -37,8 +37,22 @@ namespace AspNetCoreProject.Controllers
 
             return View(model);
         }
-        public IActionResult Login => View();
-        public IActionResult Logout => RedirectToAction("Index", "Home");
-        public IActionResult AccsessDenied => View();
+        public IActionResult Login(string returnURL) => View(new LoginViewModel { ReturnURL = returnURL});
+        [HttpPost,ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var login_result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
+
+            if (login_result.Succeeded)
+                return LocalRedirect(model.ReturnURL ?? "/");
+
+            ModelState.AddModelError("", "Ошибка ввода логина или пароля");
+
+            return View(model);
+        }
+        public IActionResult Logout() => RedirectToAction("Index", "Home");
+        public IActionResult AccsessDenied() => View();
     }
 }
