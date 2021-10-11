@@ -11,6 +11,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using AspNetCoreProject.Services.InMemory;
 using AspNetCoreProject.Services.InSql;
+using AspNetCoreProject.Domain.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace AspNetCoreProject
 {
@@ -24,6 +26,40 @@ namespace AspNetCoreProject
         {
             services.AddDbContext<WebStoreDB>(opt => opt.UseSqlServer(
                 Configuration.GetConnectionString("SqlServer")));
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<WebStoreDB>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(opt =>
+            {
+#if DEBUG
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredLength = 3;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequiredUniqueChars = 3;
+#endif
+                opt.User.RequireUniqueEmail = false;
+
+                opt.Lockout.AllowedForNewUsers = false;
+                opt.Lockout.MaxFailedAccessAttempts = 10;
+                opt.Lockout.DefaultLockoutTimeSpan = System.TimeSpan.FromMinutes(10);
+            });
+
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.Cookie.HttpOnly = true;
+                opt.Cookie.Name = "MyCookie";
+
+                opt.ExpireTimeSpan = System.TimeSpan.FromDays(10);
+
+                opt.LoginPath = "/Account/Login";
+                opt.LogoutPath = "/Account/Logout";
+                opt.AccessDeniedPath = "/Account/AccessDenied";
+
+                opt.SlidingExpiration = true;
+            });
 
             services.AddTransient<AspNetCoreProject.Data.ProjectDBInitiolizer>();
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
@@ -43,6 +79,8 @@ namespace AspNetCoreProject
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseMiddleware<TestMiddleWare>();
 
             app.UseEndpoints(endpoints =>

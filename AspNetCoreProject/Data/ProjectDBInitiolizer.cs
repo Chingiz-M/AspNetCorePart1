@@ -35,30 +35,38 @@ namespace AspNetCoreProject.Data
             if (db.Sections.Any())
                 return;
 
+            var section_dict = TestData.Sections.ToDictionary(s => s.Id);
+            var brands_dict = TestData.Brands.ToDictionary(b => b.Id);
+
+            foreach (var child_section in TestData.Sections.Where(s => s.ParentId is not null))
+                child_section.Parent = section_dict[(int)child_section.ParentId];
+
+            foreach(var product in TestData.Products)
+            {
+                product.Section = section_dict[(int)product.SectionId];
+                if (product.BrandId is not null)
+                    product.Brand = brands_dict[(int)product.BrandId];
+
+                product.Id = 0;
+                product.SectionId = 0;
+                product.BrandId = null;
+            }
+
+            foreach(var section in TestData.Sections)
+            {
+                section.Id = 0;
+                section.ParentId = null;
+            }
+
+            foreach (var brand in TestData.Brands)
+                brand.Id = 0;
+
             await using (await db.Database.BeginTransactionAsync())
             {
                 db.Sections.AddRange(TestData.Sections);
-                await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] ON");
-                await db.SaveChangesAsync();
-                await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] OFF");
-                await db.Database.CommitTransactionAsync();
-            }
-
-            await using (await db.Database.BeginTransactionAsync())
-            {
                 db.Brands.AddRange(TestData.Brands);
-                await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] ON");
-                await db.SaveChangesAsync();
-                await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] OFF");
-                await db.Database.CommitTransactionAsync();
-            }
-
-            await using (await db.Database.BeginTransactionAsync())
-            {
                 db.Products.AddRange(TestData.Products);
-                await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] ON");
                 await db.SaveChangesAsync();
-                await db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] OFF");
                 await db.Database.CommitTransactionAsync();
             }
             logger.LogInformation("Конец инициализации бд");
