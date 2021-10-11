@@ -2,6 +2,7 @@
 using AspNetCoreProject.ViewModels.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace AspNetCoreProject.Controllers
 {
@@ -16,11 +17,25 @@ namespace AspNetCoreProject.Controllers
             signInManager = SignInManager;
         }
         public IActionResult Register => View(new RegisterViewModel());
-        [HttpPost]
-        public IActionResult Register(RegisterViewModel model)
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            if (!ModelState.IsValid) return View(model);
 
-            return RedirectToAction("Index", "Home");
+            var user = new User { UserName = model.UserName };
+
+            var register_result = await userManager.CreateAsync(user, model.Password);
+
+            if (register_result.Succeeded)
+            {
+                await signInManager.SignInAsync(user, false);
+                return RedirectToAction("Index", "Home");
+            }
+
+            foreach (var error in register_result.Errors)
+                ModelState.AddModelError("", error.Description);
+
+            return View(model);
         }
         public IActionResult Login => View();
         public IActionResult Logout => RedirectToAction("Index", "Home");
