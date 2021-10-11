@@ -79,6 +79,8 @@ namespace AspNetCoreProject
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseMiddleware<TestMiddleWare>();
 
             app.UseEndpoints(endpoints =>
