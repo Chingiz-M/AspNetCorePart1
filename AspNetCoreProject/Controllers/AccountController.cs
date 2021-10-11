@@ -52,7 +52,11 @@ namespace AspNetCoreProject.Controllers
 
             return View(model);
         }
-        public IActionResult Logout() => RedirectToAction("Index", "Home");
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
         public IActionResult AccsessDenied() => View();
     }
 }
