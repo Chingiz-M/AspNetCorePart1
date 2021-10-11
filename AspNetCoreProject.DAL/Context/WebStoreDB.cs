@@ -1,14 +1,11 @@
 ﻿using AspNetCoreProject.Domain.Entities;
+using AspNetCoreProject.Domain.Entities.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AspNetCoreProject.DAL.Context
 {
-    public class WebStoreDB: DbContext
+    public class WebStoreDB: IdentityDbContext<User,Role,string>
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Section> Sections { get; set; }
