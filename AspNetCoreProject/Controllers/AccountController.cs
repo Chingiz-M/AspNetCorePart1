@@ -29,6 +29,7 @@ namespace AspNetCoreProject.Controllers
             if (register_result.Succeeded)
             {
                 await signInManager.SignInAsync(user, false);
+                await userManager.AddToRoleAsync(user, Role.Users);
                 return RedirectToAction("Index", "Home");
             }
 
