@@ -1,4 +1,5 @@
 ﻿using AspNetCoreProject.Domain;
+using AspNetCoreProject.Infrastructure.Mapping;
 using AspNetCoreProject.Services.Interfaces;
 using AspNetCoreProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -31,17 +32,20 @@ namespace AspNetCoreProject.Controllers
             {
                 BrandId = brandId,
                 SectionId = sectionId,
-                Products = products.OrderBy(p => p.Order).Select(
-                    p => new ProductViewModel()
-                    {
-                        Id = p.Id,
-                        ImageUrl = p.ImageUrl,
-                        Name = p.Name,
-                        Price = p.Price
-                    })
+                Products = products.OrderBy(p => p.Order).ToView(),
             };
 
             return View(view_model);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var product = productData.GetProductById(id);
+
+            if (product is null)
+                return NotFound();
+
+            return View(product.ToView());
         }
     }
 }

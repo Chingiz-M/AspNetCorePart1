@@ -1,4 +1,6 @@
 ﻿using AspNetCoreProject.DAL.Context;
+using AspNetCoreProject.Domain.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,11 +14,18 @@ namespace AspNetCoreProject.Data
     {
         private readonly WebStoreDB db;
         private readonly ILogger<ProjectDBInitiolizer> logger;
+        private readonly UserManager<User> userManager;
+        private readonly RoleManager<Role> roleManager;
 
-        public ProjectDBInitiolizer(WebStoreDB db, ILogger<ProjectDBInitiolizer> Logger)
+        public ProjectDBInitiolizer(WebStoreDB db, 
+            ILogger<ProjectDBInitiolizer> Logger,
+            UserManager<User> userManager, 
+            RoleManager<Role> roleManager)
         {
             this.db = db;
             logger = Logger;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public async Task InitiolizeAsync()
@@ -27,7 +36,26 @@ namespace AspNetCoreProject.Data
 
             if (pending_migrations.Any())
                 await db.Database.MigrateAsync();
-            await InitiolizeProductAsync();
+
+            try
+            {
+                await InitiolizeProductAsync();
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, "Ошибка инициализации каталога товаров");
+                throw;
+            }
+
+            try
+            {
+                await InitiolizeIdentityAsync();
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, "Ошибка инициализации идентификации");
+                throw;
+            }
         } 
 
         private async Task InitiolizeProductAsync()
@@ -71,6 +99,42 @@ namespace AspNetCoreProject.Data
             }
             logger.LogInformation("Конец инициализации бд");
 
+        }
+
+        private async Task InitiolizeIdentityAsync()
+        {
+            logger.LogInformation("Инициализация системы Identity");
+
+            async Task CheckRole(string name)
+            {
+                if (await roleManager.RoleExistsAsync(name))
+                    logger.LogInformation($"Роль {name} существует");
+                else
+                {
+                    logger.LogInformation($"Создание роли {name}");
+                    await roleManager.CreateAsync(new Role { Name = name });
+                }
+            }
+
+            await CheckRole(Role.Administrators);
+            await CheckRole(Role.Users);
+
+            if(await userManager.FindByNameAsync(User.Administrator) is null)
+            {
+                logger.LogInformation($"Создаем пользователя {User.Administrator}");
+
+                var admin = new User { UserName = User.Administrator };
+
+                var result_create = await userManager.CreateAsync(admin, User.DefaultAdminPass);
+                if (result_create.Succeeded)
+                    await userManager.AddToRoleAsync(admin, Role.Administrators);
+                else
+                {
+                    var errors = result_create.Errors.Select(e => e.Description).ToArray();
+                    logger.LogError($"Ошибка создания учетки админа, ошибки: {string.Join(", ",errors)}");
+                    throw new InvalidOperationException("Невозможно создать админа");
+                }
+            }
         }
     }
 }

@@ -1,11 +1,13 @@
 ﻿using AspNetCoreProject.Domain.Entities.Identity;
 using AspNetCoreProject.ViewModels.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace AspNetCoreProject.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<User> userManager;
@@ -16,7 +18,10 @@ namespace AspNetCoreProject.Controllers
             userManager = UserManager;
             signInManager = SignInManager;
         }
+        [AllowAnonymous]
         public IActionResult Register() => View(new RegisterViewModel());
+        [AllowAnonymous]
+
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -29,6 +34,7 @@ namespace AspNetCoreProject.Controllers
             if (register_result.Succeeded)
             {
                 await signInManager.SignInAsync(user, false);
+                await userManager.AddToRoleAsync(user, Role.Users);
                 return RedirectToAction("Index", "Home");
             }
 
@@ -37,7 +43,9 @@ namespace AspNetCoreProject.Controllers
 
             return View(model);
         }
+        [AllowAnonymous]
         public IActionResult Login(string returnURL) => View(new LoginViewModel { ReturnURL = returnURL});
+        [AllowAnonymous]
         [HttpPost,ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -57,6 +65,7 @@ namespace AspNetCoreProject.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+        [AllowAnonymous]
         public IActionResult AccsessDenied() => View();
     }
 }

@@ -3,9 +3,12 @@ using AspNetCoreProject.ViewModels;
 using AspNetCoreProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
+using AspNetCoreProject.Domain.Entities.Identity;
 
 namespace AspNetCoreProject.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private readonly IEmployeesData employeesData;
@@ -30,6 +33,7 @@ namespace AspNetCoreProject.Controllers
         }
 
         #region Edit
+        [Authorize(Roles =Role.Administrators)]
         public IActionResult Edit(int? id)
         {
             if (id is null)
@@ -51,6 +55,7 @@ namespace AspNetCoreProject.Controllers
             return View(model);
         }
         [HttpPost]
+        [Authorize(Roles = Role.Administrators)]
         public IActionResult Edit(EmployeeViewModel model)
         {
             if (model.Age == 18 && model.Name == "Name")
@@ -64,9 +69,10 @@ namespace AspNetCoreProject.Controllers
             else
                 employeesData.Update(employee);
             return RedirectToAction(nameof(Index));
-        } 
+        }
         #endregion
 
+        [Authorize(Roles = Role.Administrators)]
         public IActionResult Delete(int id)
         {
             var employee = employeesData.GetById(id);
@@ -84,12 +90,13 @@ namespace AspNetCoreProject.Controllers
             });
         }
         [HttpPost]
+        [Authorize(Roles = Role.Administrators)]
         public IActionResult DeleteConfirmed(int id)
         {
             employeesData.Delete(id);
             return RedirectToAction(nameof(Index));
         }
-
+        [Authorize(Roles = Role.Administrators)]
         public IActionResult Create() => View("Edit", new EmployeeViewModel());
     }
 }
