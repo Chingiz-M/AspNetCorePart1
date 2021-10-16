@@ -31,7 +31,7 @@ namespace AspNetCoreProject.Services.InSql
         {
             IQueryable<Product> products = db.Products.Include(p => p.Brand).Include(p => p.Section);
 
-            if (filter.Ids.Length > 0)
+            if (filter?.Ids?.Length > 0)
                 products = products.Where(p => filter.Ids.Contains(p.Id));
             else
             {
