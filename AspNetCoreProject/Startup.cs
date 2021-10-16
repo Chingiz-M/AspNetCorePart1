@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using AspNetCoreProject.Services.InMemory;
 using AspNetCoreProject.Services.InSql;
+using AspNetCoreProject.Services.In_Cookies;
 using AspNetCoreProject.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 
@@ -64,6 +65,7 @@ namespace AspNetCoreProject
             services.AddTransient<AspNetCoreProject.Data.ProjectDBInitiolizer>();
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddScoped<IProductData, SqlProductData>();
+            services.AddScoped<ICartService, InCookiesCartService>();
             services.AddControllersWithViews(opt => opt.Conventions.Add(new TestControllerConventions())).AddRazorRuntimeCompilation();
         }
 
