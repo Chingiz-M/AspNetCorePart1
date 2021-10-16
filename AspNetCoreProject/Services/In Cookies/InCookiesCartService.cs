@@ -1,4 +1,5 @@
 ﻿using AspNetCoreProject.Domain.Entities;
+using AspNetCoreProject.Infrastructure.Mapping;
 using AspNetCoreProject.Services.Interfaces;
 using AspNetCoreProject.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -91,7 +92,18 @@ namespace AspNetCoreProject.Services.In_Cookies
 
         public CartViewModel GetViewModel()
         {
-            throw new NotImplementedException();
+            var products = productData.GetProducts(new Domain.ProductFilter
+            {
+                Ids = Cart.Items.Select(i => i.ProductId).ToArray()
+            });
+
+            var products_views = products.ToView().ToDictionary(p => p.Id);
+
+            return new CartViewModel()
+            {
+                Items = Cart.Items.Where(i => products_views.ContainsKey(i.ProductId))
+                                    .Select(i => (products_views[i.ProductId], i.Quantity))
+            };
         }
 
         public void Remove(int id)

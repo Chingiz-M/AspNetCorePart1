@@ -31,11 +31,16 @@ namespace AspNetCoreProject.Services.InSql
         {
             IQueryable<Product> products = db.Products.Include(p => p.Brand).Include(p => p.Section);
 
-            if (filter?.SectionId != null)
-                products = products.Where(p => p.SectionId == filter.SectionId);
+            if (filter.Ids.Length > 0)
+                products = products.Where(p => filter.Ids.Contains(p.Id));
+            else
+            {
+                if (filter?.SectionId != null)
+                    products = products.Where(p => p.SectionId == filter.SectionId);
 
-            if (filter?.BrandId != null)
-                products = products.Where(p => p.BrandId == filter.BrandId);
+                if (filter?.BrandId != null)
+                    products = products.Where(p => p.BrandId == filter.BrandId);
+            }
 
             return products;
         }
