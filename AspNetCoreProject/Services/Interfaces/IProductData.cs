@@ -12,5 +12,8 @@ namespace AspNetCoreProject.Services.Interfaces
         IEnumerable<Section> GetSections(); 
         IEnumerable<Brand> GetBrands();
         IEnumerable<Product> GetProducts(ProductFilter filter = null);
+        Product GetProductById(int id);
+        Brand GetBrandById(int id);
+        Section GetSectionById(int id);
     }
 }

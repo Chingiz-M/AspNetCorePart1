@@ -9,7 +9,12 @@ namespace AspNetCoreProject.Services.InMemory
 {
     public class InMemoryProductData : IProductData
     {
+        public Brand GetBrandById(int id) => TestData.Brands.FirstOrDefault(b => b.Id == id);
+
         public IEnumerable<Brand> GetBrands() => TestData.Brands;
+
+        public Product GetProductById(int id) => TestData.Products.FirstOrDefault(p => p.Id == id);
+
 
         public IEnumerable<Product> GetProducts(ProductFilter filter = null)
         {
@@ -23,6 +28,8 @@ namespace AspNetCoreProject.Services.InMemory
 
             return products;
         }
+
+        public Section GetSectionById(int id) => TestData.Sections.FirstOrDefault(s => s.Id == id);
 
         public IEnumerable<Section> GetSections() => TestData.Sections;
     }
