@@ -1,14 +1,13 @@
-﻿using AspNetCoreProject.Infrastructure.Mapping;
+﻿using AspNetCoreProject.Domain.Entities.Identity;
+using AspNetCoreProject.Infrastructure.Mapping;
 using AspNetCoreProject.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AspNetCoreProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = Role.Administrators)]
     public class ProductsController : Controller
     {
         private readonly IProductData productData;
