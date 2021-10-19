@@ -23,6 +23,8 @@ namespace AspNetCoreProject.Domain.Entities.Orders
         public DateTimeOffset Date { get; set; } = DateTimeOffset.UtcNow;
         public string Description { get; set; }
         public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
+        [NotMapped]
+        public decimal TotalPrice => Items?.Sum(i => i.TotalItemPrice) ?? 0;
     }
     public class OrderItem : Entity
     {
