@@ -50,11 +50,12 @@ namespace AspNetCoreProject.Controllers
                 orderViewModel);
 
             cartService.Clear(); 
-            return RedirectToAction(nameof(OrderConfirmed), new {id = order.Id);
+            return RedirectToAction(nameof(OrderConfirmed), new { id = order.Id });
         }
 
         public IActionResult OrderConfirmed(int id)
         {
+            ViewBag.OrderId = id;
             return View();
         }
     }
