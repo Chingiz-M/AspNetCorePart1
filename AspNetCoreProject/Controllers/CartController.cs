@@ -1,4 +1,6 @@
 ﻿using AspNetCoreProject.Services.Interfaces;
+using AspNetCoreProject.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,7 @@ namespace AspNetCoreProject.Controllers
         {
             this.cartService = cartService;
         }
-        public IActionResult Index() => View(cartService.GetViewModel());
+        public IActionResult Index() => View(new CartOrderViewModel { CartViewModel = cartService.GetViewModel() });
         public IActionResult Add(int id) 
         {
             cartService.Add(id);
@@ -30,6 +32,30 @@ namespace AspNetCoreProject.Controllers
         {
             cartService.Remove(id);
             return RedirectToAction("Index", "Cart");
+        }
+        [Authorize]
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> CheckOut(OrderViewModel orderViewModel, [FromServices] IOrderService orderService)
+        {
+            if (!ModelState.IsValid)
+                return View(nameof(Index), new CartOrderViewModel
+                {
+                    CartViewModel = cartService.GetViewModel(),
+                    OrderViewModel = orderViewModel,
+                });
+
+            var order = await orderService.CreateOrder(
+                User.Identity.Name,
+                cartService.GetViewModel(),
+                orderViewModel);
+
+            cartService.Clear(); 
+            return RedirectToAction(nameof(OrderConfirmed), new {id = order.Id);
+        }
+
+        public IActionResult OrderConfirmed(int id)
+        {
+            return View();
         }
     }
 }
