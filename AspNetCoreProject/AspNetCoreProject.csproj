@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AspNetCoreProject.DAL.SqlLite\AspNetCoreProject.DAL.SqlLite.csproj" />
     <ProjectReference Include="..\AspNetCoreProject.DAL\AspNetCoreProject.DAL.csproj" />
     <ProjectReference Include="..\AspNetCoreProject.Domain\AspNetCoreProject.Domain.csproj" />
   </ItemGroup>
