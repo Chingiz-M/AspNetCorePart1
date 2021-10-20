@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AspNetCoreProject.Domain\AspNetCoreProject.Domain.csproj" />
+    <ProjectReference Include="..\..\Common\AspNetCoreProject.Domain\AspNetCoreProject.Domain.csproj" />
   </ItemGroup>
 
 </Project>
