@@ -1,5 +1,5 @@
 ﻿using AspNetCoreProject.Domain.Entities.Orders;
-using AspNetCoreProject.ViewModels;
+using AspNetCoreProject.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

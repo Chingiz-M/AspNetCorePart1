@@ -1,6 +1,6 @@
 ﻿@using AspNetCoreProject.Services.Interfaces
 @using AspNetCoreProject.Infrastructure.Mapping
-@using AspNetCoreProject.ViewModels
+@using AspNetCoreProject.Domain.ViewModels
 @inject IProductData ProductData
 @{
     var products = ProductData.GetProducts().Take(6).ToView();

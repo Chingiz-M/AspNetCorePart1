@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace AspNetCoreProject.ViewModels.Identity
+namespace AspNetCoreProject.Domain.ViewModels.Identity
 {
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name ="Имя пользователя")]
+        [Display(Name = "Имя пользователя")]
         public string UserName { get; set; }
 
         [Required]

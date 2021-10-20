@@ -1,12 +1,9 @@
 ﻿using AspNetCoreProject.Domain;
+using AspNetCoreProject.Domain.ViewModels;
 using AspNetCoreProject.Infrastructure.Mapping;
 using AspNetCoreProject.Services.Interfaces;
-using AspNetCoreProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace AspNetCoreProject.Controllers
 {

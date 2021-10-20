@@ -1,4 +1,4 @@
-﻿using AspNetCoreProject.ViewModels;
+﻿using AspNetCoreProject.Domain.ViewModels;
 
 namespace AspNetCoreProject.Services.Interfaces
 {

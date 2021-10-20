@@ -1,7 +1,7 @@
 ﻿using AspNetCoreProject.Domain.Entities;
+using AspNetCoreProject.Domain.ViewModels;
 using AspNetCoreProject.Infrastructure.Mapping;
 using AspNetCoreProject.Services.Interfaces;
-using AspNetCoreProject.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;

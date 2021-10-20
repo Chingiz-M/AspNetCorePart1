@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
-namespace AspNetCoreProject.ViewModels
+namespace AspNetCoreProject.Domain.ViewModels
 {
     public class EmployeeViewModel //: IValidatableObject
     {
@@ -28,7 +25,7 @@ namespace AspNetCoreProject.ViewModels
 
         [Display(Name = "Возраст")]
         [Required(ErrorMessage = "Возраст не указан")]
-        [Range(18,90,ErrorMessage = "Возраст от 18 до 90 лет")]
+        [Range(18, 90, ErrorMessage = "Возраст от 18 до 90 лет")]
         public int Age { get; set; }
 
         //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

@@ -1,5 +1,6 @@
 ﻿@using AspNetCoreProject.Domain.Entities.Identity;
-@model List<AspNetCoreProject.Models.Employee>
+
+@model List<AspNetCoreProject.Domain.Models.Employee>
 
 <div class="container">
     @if (User.IsInRole(Role.Administrators))

@@ -1,4 +1,4 @@
-﻿using AspNetCoreProject.Models;
+﻿using AspNetCoreProject.Domain.Models;
 using System.Collections.Generic;
 
 namespace AspNetCoreProject.Services.Interfaces

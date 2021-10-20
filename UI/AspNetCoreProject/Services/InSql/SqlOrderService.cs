@@ -1,8 +1,8 @@
 ﻿using AspNetCoreProject.DAL.Context;
 using AspNetCoreProject.Domain.Entities.Identity;
 using AspNetCoreProject.Domain.Entities.Orders;
+using AspNetCoreProject.Domain.ViewModels;
 using AspNetCoreProject.Services.Interfaces;
-using AspNetCoreProject.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;

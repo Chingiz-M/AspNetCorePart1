@@ -1,7 +1,7 @@
-﻿using AspNetCoreProject.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using AspNetCoreProject.Domain.Entities;
+using AspNetCoreProject.Domain.Models;
 
 namespace AspNetCoreProject.Data
 {

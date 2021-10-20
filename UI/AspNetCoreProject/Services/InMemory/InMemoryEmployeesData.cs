@@ -1,5 +1,5 @@
 ﻿using AspNetCoreProject.Data;
-using AspNetCoreProject.Models;
+using AspNetCoreProject.Domain.Models;
 using AspNetCoreProject.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 using System;

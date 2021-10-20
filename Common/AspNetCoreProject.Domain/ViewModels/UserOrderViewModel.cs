@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AspNetCoreProject.ViewModels
+namespace AspNetCoreProject.Domain.ViewModels
 {
     public class UserOrderViewModel
     {

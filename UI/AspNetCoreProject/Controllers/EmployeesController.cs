@@ -1,10 +1,10 @@
-﻿using AspNetCoreProject.Services.Interfaces;
-using AspNetCoreProject.ViewModels;
-using AspNetCoreProject.Models;
+﻿using AspNetCoreProject.Domain.Entities.Identity;
+using AspNetCoreProject.Domain.Models;
+using AspNetCoreProject.Domain.ViewModels;
+using AspNetCoreProject.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Authorization;
-using AspNetCoreProject.Domain.Entities.Identity;
 
 namespace AspNetCoreProject.Controllers
 {

@@ -1,4 +1,4 @@
-﻿namespace AspNetCoreProject.ViewModels
+﻿namespace AspNetCoreProject.Domain.ViewModels
 {
     public class ProductViewModel
     {

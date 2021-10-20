@@ -1,9 +1,7 @@
-﻿using AspNetCoreProject.Services.Interfaces;
-using AspNetCoreProject.ViewModels;
+﻿using AspNetCoreProject.Domain.ViewModels;
+using AspNetCoreProject.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 

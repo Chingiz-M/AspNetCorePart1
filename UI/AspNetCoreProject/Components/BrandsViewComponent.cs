@@ -1,6 +1,5 @@
-﻿using AspNetCoreProject.Data;
+﻿using AspNetCoreProject.Domain.ViewModels;
 using AspNetCoreProject.Services.Interfaces;
-using AspNetCoreProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
