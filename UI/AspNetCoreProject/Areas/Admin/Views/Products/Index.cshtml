@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AspNetCoreProject.Domain.ViewModels.ProductViewModel>
+@{
+    ViewBag.Title = "Управление каталогом товаров";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>@Html.DisplayNameFor(p => p.Id)</th>
+                    <th>@Html.DisplayNameFor(p => p.Name)</th>
+                    <th>@Html.DisplayNameFor(p => p.Brand)</th>
+                    <th>@Html.DisplayNameFor(p => p.Section)</th>
+                    <th>@Html.DisplayNameFor(p => p.ImageUrl)</th>
+                    <th>@Html.DisplayNameFor(p => p.Price)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    var brand = product.Brand is null ? product.Brand : "";
+                    <tr>
+                        <td>
+                            <a href="#">
+                                <i class="glyphicon glyphicon-edit"></i>ред.
+                            </a>
+                        </td>
+                        <td>@Html.DisplayFor(_ => product.Id)</td>
+                        <td>@Html.DisplayFor(_ => product.Name)</td>
+                        <td>@Html.DisplayFor(_ => brand) </td>
+                        <td>@Html.DisplayFor(_ => product.Section)</td>
+                        <td>
+                            <img src="~/images/shop/@product.ImageUrl" alt="@product.Name" width="50" />
+                        </td>
+                        <td>@Html.DisplayFor(_ => product.Price)</td>
+                        <td>
+                            <a href="#" class="text-danger">
+                                <i class="glyphicon glyphicon-remove"></i>уд.
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

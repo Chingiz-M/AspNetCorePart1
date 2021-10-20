@@ -1,0 +1,32 @@
+﻿@model IEnumerable<AspNetCoreProject.Domain.ViewModels.UserOrderViewModel>
+@{
+    ViewBag.Title = "Профиль пользователя";
+    Layout = "_UserProfileLayout";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Адрес</th>
+            <th>Телефон</th>
+            <th>Сумма</th>
+            <th>Комментарий</th>
+            <th>Дата</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{var i = 1;}
+        @foreach (var order in Model)
+        {
+            <tr>
+                <th>@(i++)</th>
+                <th>@order.Address</th>
+                <th>@order.Phone</th>
+                <th>@order.TotalPrice</th>
+                <th>@order.Description</th>
+                <th>@order.Date.ToString("d")</th>
+            </tr>
+        }
+    </tbody>
+</table>
