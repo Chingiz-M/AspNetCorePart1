@@ -19,9 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreProject.DAL.SqlLi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreProject", "UI\AspNetCoreProject\AspNetCoreProject.csproj", "{77527638-8313-4CD0-87E9-EF36DCE14619}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreProj.Interfaces", "Services\AspNetCoreProj.Interfaces\AspNetCoreProj.Interfaces.csproj", "{96DE20FC-0826-4C0F-A61D-D0C30177F136}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreProj.Interfaces", "Services\AspNetCoreProj.Interfaces\AspNetCoreProj.Interfaces.csproj", "{96DE20FC-0826-4C0F-A61D-D0C30177F136}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreProj.Services", "Services\AspNetCoreProj.Services\AspNetCoreProj.Services.csproj", "{31F19751-D58F-443D-9B87-9ABEB1B3CCC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreProj.Services", "Services\AspNetCoreProj.Services\AspNetCoreProj.Services.csproj", "{31F19751-D58F-443D-9B87-9ABEB1B3CCC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreProj.WebApi", "Services\AspNetCoreProj.WebApi\AspNetCoreProj.WebApi.csproj", "{0742AEA7-4DA6-45FA-97A6-5756FA16F30D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{31F19751-D58F-443D-9B87-9ABEB1B3CCC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31F19751-D58F-443D-9B87-9ABEB1B3CCC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31F19751-D58F-443D-9B87-9ABEB1B3CCC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0742AEA7-4DA6-45FA-97A6-5756FA16F30D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0742AEA7-4DA6-45FA-97A6-5756FA16F30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0742AEA7-4DA6-45FA-97A6-5756FA16F30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0742AEA7-4DA6-45FA-97A6-5756FA16F30D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{77527638-8313-4CD0-87E9-EF36DCE14619} = {C146961D-C25D-47E0-AEAF-12AEC97D3DCE}
 		{96DE20FC-0826-4C0F-A61D-D0C30177F136} = {FC416273-F7BB-4ADC-9637-C4196FA102E2}
 		{31F19751-D58F-443D-9B87-9ABEB1B3CCC0} = {FC416273-F7BB-4ADC-9637-C4196FA102E2}
+		{0742AEA7-4DA6-45FA-97A6-5756FA16F30D} = {FC416273-F7BB-4ADC-9637-C4196FA102E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7F7C329-14FE-4B54-9528-F2250A636CCB}
