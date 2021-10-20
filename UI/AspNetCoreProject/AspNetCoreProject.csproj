@@ -20,6 +20,7 @@
     <ProjectReference Include="..\..\Data\AspNetCoreProject.DAL.SqlLite\AspNetCoreProject.DAL.SqlLite.csproj" />
     <ProjectReference Include="..\..\Data\AspNetCoreProject.DAL\AspNetCoreProject.DAL.csproj" />
     <ProjectReference Include="..\..\Services\AspNetCoreProj.Interfaces\AspNetCoreProj.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Services\AspNetCoreProj.Services\AspNetCoreProj.Services.csproj" />
   </ItemGroup>
 
 </Project>
