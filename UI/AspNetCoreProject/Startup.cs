@@ -14,6 +14,8 @@ using AspNetCoreProject.Services.InSql;
 using AspNetCoreProject.Services.In_Cookies;
 using AspNetCoreProject.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
+using AspNetCoreProj.Interfaces.TestApi;
+using AspNetCoreProj.WebApi.Clients.Values;
 
 namespace AspNetCoreProject
 {
@@ -81,6 +83,7 @@ namespace AspNetCoreProject
             services.AddScoped<ICartService, InCookiesCartService>();
             services.AddScoped<IOrderService, SqlOrderService>();
             services.AddControllersWithViews(opt => opt.Conventions.Add(new TestControllerConventions())).AddRazorRuntimeCompilation();
+            services.AddHttpClient<IValuesService, ValuesClient>(client => client.BaseAddress = new(Configuration["WebAPI"]));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

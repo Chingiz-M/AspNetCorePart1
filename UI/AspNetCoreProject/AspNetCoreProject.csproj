@@ -21,6 +21,7 @@
     <ProjectReference Include="..\..\Data\AspNetCoreProject.DAL\AspNetCoreProject.DAL.csproj" />
     <ProjectReference Include="..\..\Services\AspNetCoreProj.Interfaces\AspNetCoreProj.Interfaces.csproj" />
     <ProjectReference Include="..\..\Services\AspNetCoreProj.Services\AspNetCoreProj.Services.csproj" />
+    <ProjectReference Include="..\..\Services\AspNetCoreProj.WebApi.Clients\AspNetCoreProj.WebApi.Clients.csproj" />
   </ItemGroup>
 
 </Project>

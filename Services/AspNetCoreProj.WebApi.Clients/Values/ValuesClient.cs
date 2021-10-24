@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreProj.WebApi.Clients.Values
 {
-    class ValuesClient : BaseClient, IValuesService
+    public class ValuesClient : BaseClient, IValuesService
     {
         public ValuesClient(HttpClient client) : base(client, "api/values")
         {
