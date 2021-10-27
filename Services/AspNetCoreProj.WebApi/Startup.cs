@@ -1,15 +1,11 @@
+using AspNetCoreProject.DAL.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AspNetCoreProj.WebApi
 {
@@ -19,6 +15,19 @@ namespace AspNetCoreProj.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var db_type = Configuration["Database"];
+
+            switch (db_type)
+            {
+                case "SqlServer":
+                    services.AddDbContext<WebStoreDB>(opt => opt.UseSqlServer(
+                        Configuration.GetConnectionString(db_type)));
+                    break;
+                case "Sqlite":
+                    services.AddDbContext<WebStoreDB>(opt => opt.UseSqlite(
+                        Configuration.GetConnectionString(db_type), o => o.MigrationsAssembly("AspNetCoreProject.DAL.SqlLite")));
+                    break;
+            }
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

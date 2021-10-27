@@ -26,22 +26,7 @@ namespace AspNetCoreProject
         public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public void ConfigureServices(IServiceCollection services)
-        {
-            var db_type = Configuration["Database"];
-
-            switch (db_type)
-            {
-                case "SqlServer":
-                    services.AddDbContext<WebStoreDB>(opt => opt.UseSqlServer(
-                        Configuration.GetConnectionString(db_type)));
-                    break;
-                case "Sqlite":
-                    services.AddDbContext<WebStoreDB>(opt => opt.UseSqlite(
-                        Configuration.GetConnectionString(db_type), o => o.MigrationsAssembly("AspNetCoreProject.DAL.SqlLite")));
-                    break;
-            }
-
-            
+        {                      
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<WebStoreDB>()
                 .AddDefaultTokenProviders();
