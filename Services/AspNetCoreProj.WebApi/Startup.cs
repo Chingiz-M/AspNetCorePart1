@@ -1,6 +1,12 @@
 using AspNetCoreProject.DAL.Context;
+using AspNetCoreProject.Domain.Entities.Identity;
+using AspNetCoreProject.Services.In_Cookies;
+using AspNetCoreProject.Services.InMemory;
+using AspNetCoreProject.Services.InSql;
+using AspNetCoreProject.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,10 +15,15 @@ using Microsoft.OpenApi.Models;
 
 namespace AspNetCoreProj.WebApi
 {
-    public record Startup(IConfiguration configuration)
+    public class Startup
     {
+        
         public IConfiguration Configuration { get; }
 
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
         public void ConfigureServices(IServiceCollection services)
         {
             var db_type = Configuration["Database"];
@@ -28,6 +39,32 @@ namespace AspNetCoreProj.WebApi
                         Configuration.GetConnectionString(db_type), o => o.MigrationsAssembly("AspNetCoreProject.DAL.SqlLite")));
                     break;
             }
+
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<WebStoreDB>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(opt =>
+            {
+#if DEBUG
+                opt.Password.RequireDigit = false;
+                opt.Password.RequiredLength = 3;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequiredUniqueChars = 3;
+#endif
+                opt.User.RequireUniqueEmail = false;
+
+                opt.Lockout.AllowedForNewUsers = false;
+                opt.Lockout.MaxFailedAccessAttempts = 10;
+                opt.Lockout.DefaultLockoutTimeSpan = System.TimeSpan.FromMinutes(10);
+            });
+
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            services.AddScoped<IProductData, SqlProductData>();
+            services.AddScoped<ICartService, InCookiesCartService>();
+            services.AddScoped<IOrderService, SqlOrderService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
