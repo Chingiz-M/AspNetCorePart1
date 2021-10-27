@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewBag.Title | E-Shopper</title>
+    
+    <partial name="Partial/_Styles"></partial>
+
+</head><!--/head-->
+
+<body>
+    <partial name="Partial/_Header"></partial>
+    @RenderBody()
+    <partial name="Partial/_Footer"></partial>
+    <partial name="Partial/_Scripts"></partial>
+
+    @await RenderSectionAsync("Scripts", false) 
+</body>
+</html>

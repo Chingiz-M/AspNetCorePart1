@@ -20,7 +20,9 @@ namespace AspNetCoreProj.WebApi.Clients.Employees
         public int Add(Employee employee)
         {
             var response = Post<Employee>(address, employee);
-            var added_emp = response.Content.ReadFromJsonAsync<Employee>();
+            var added_emp = response.Content.ReadFromJsonAsync<Employee>().Result;
+            if (added_emp is null)
+                return -1;
             var id_emp = added_emp.Id;
             return id_emp;
         }
