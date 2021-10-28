@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreProj.WebApi.Clients.Values
 {
-    class ValuesClient : BaseClient, IValuesService
+    public class ValuesClient : BaseClient, IValuesService
     {
         public ValuesClient(HttpClient client) : base(client, "api/values")
         {
@@ -18,7 +18,8 @@ namespace AspNetCoreProj.WebApi.Clients.Values
 
         public void Add(string value)
         {
-            throw new NotImplementedException();
+            var response = client.PostAsJsonAsync(address, value).Result;
+            response.EnsureSuccessStatusCode();
         }
 
         public int Count()
@@ -32,12 +33,14 @@ namespace AspNetCoreProj.WebApi.Clients.Values
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            var response = client.DeleteAsync($"{address}/{id}").Result;
+            return response.IsSuccessStatusCode;
         }
 
         public void Edit(int id, string value)
         {
-            throw new NotImplementedException();
+            var response = client.PutAsJsonAsync($"{address}/{id}", value).Result;
+            response.EnsureSuccessStatusCode();
         }
 
         public IEnumerable<string> GetAll()
