@@ -18,6 +18,7 @@ using AspNetCoreProj.Interfaces.TestApi;
 using AspNetCoreProj.WebApi.Clients.Values;
 using AspNetCoreProj.WebApi.Clients.Employees;
 using AspNetCoreProj.WebApi.Clients.Products;
+using AspNetCoreProj.WebApi.Clients.Orders;
 
 namespace AspNetCoreProject
 {
@@ -82,13 +83,14 @@ namespace AspNetCoreProject
             //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             //services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<ICartService, InCookiesCartService>();
-            services.AddScoped<IOrderService, SqlOrderService>();
+            //services.AddScoped<IOrderService, SqlOrderService>();
             services.AddControllersWithViews(opt => opt.Conventions.Add(new TestControllerConventions())).AddRazorRuntimeCompilation();
             //services.AddHttpClient<IValuesService, ValuesClient>(client => client.BaseAddress = new(Configuration["WebAPI"]));
             services.AddHttpClient("ProjectWebApi", client => client.BaseAddress = new(Configuration["WebAPI"]))
                 .AddTypedClient<IValuesService, ValuesClient>()
                 .AddTypedClient<IEmployeesData, EmployeesClient>()
-                .AddTypedClient<IProductData, ProductsClient>();
+                .AddTypedClient<IProductData, ProductsClient>()
+                .AddTypedClient<IOrderService, OrdersClient>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
