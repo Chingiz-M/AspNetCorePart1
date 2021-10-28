@@ -83,7 +83,7 @@ namespace AspNetCoreProject.Domain.DTO
                 Price = p.product.Price,
                 Quantity = p.Quantity,
             });
-        public static CartViewModel FromDTO(this IEnumerable<OrderItemDTO> orders) => new()
+        public static CartViewModel ToCartView(this IEnumerable<OrderItemDTO> orders) => new()
         {
             Items = orders.Select(p => (new ProductViewModel { Id = p.ProductId }, p.Quantity))
         };
