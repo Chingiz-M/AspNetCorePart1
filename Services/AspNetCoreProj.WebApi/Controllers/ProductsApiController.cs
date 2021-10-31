@@ -1,16 +1,12 @@
-﻿using AspNetCoreProject.Domain;
+﻿using AspNetCoreProj.Interfaces;
+using AspNetCoreProject.Domain;
 using AspNetCoreProject.Domain.DTO;
 using AspNetCoreProject.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AspNetCoreProj.WebApi.Controllers
 {
-    [Route("api/products")]
+    [Route(WebApiAddresses.Products)]
     [ApiController]
     public class ProductsApiController : ControllerBase
     {

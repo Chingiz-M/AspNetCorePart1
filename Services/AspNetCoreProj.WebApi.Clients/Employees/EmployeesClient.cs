@@ -1,19 +1,16 @@
-﻿using AspNetCoreProj.WebApi.Clients.Base;
+﻿using AspNetCoreProj.Interfaces;
+using AspNetCoreProj.WebApi.Clients.Base;
 using AspNetCoreProject.Domain.Models;
 using AspNetCoreProject.Services.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AspNetCoreProj.WebApi.Clients.Employees
 {
     public class EmployeesClient : BaseClient, IEmployeesData
     {
-        public EmployeesClient(HttpClient client) : base(client, "api/employees")
+        public EmployeesClient(HttpClient client) : base(client, WebApiAddresses.Employees)
         {
         }
 

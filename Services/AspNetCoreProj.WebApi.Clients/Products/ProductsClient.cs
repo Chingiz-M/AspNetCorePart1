@@ -1,21 +1,18 @@
-﻿using AspNetCoreProj.WebApi.Clients.Base;
+﻿using AspNetCoreProj.Interfaces;
+using AspNetCoreProj.WebApi.Clients.Base;
 using AspNetCoreProject.Domain;
 using AspNetCoreProject.Domain.DTO;
 using AspNetCoreProject.Domain.Entities;
 using AspNetCoreProject.Services.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AspNetCoreProj.WebApi.Clients.Products
 {
     public class ProductsClient : BaseClient, IProductData
     {
-        public ProductsClient(HttpClient client) : base(client, "api/products")
+        public ProductsClient(HttpClient client) : base(client, WebApiAddresses.Products)
         {
         }
 

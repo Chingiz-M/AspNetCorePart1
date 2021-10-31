@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AspNetCoreProj.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AspNetCoreProj.WebApi.Controllers.Identity
 {
-    [Route("api/[controller]")]
+    [Route(WebApiAddresses.Identity.Roles)]
     [ApiController]
     public class RolesApiController : ControllerBase
     {
