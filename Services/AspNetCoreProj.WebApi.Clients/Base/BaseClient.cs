@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace AspNetCoreProj.WebApi.Clients.Base
 {
@@ -20,6 +21,7 @@ namespace AspNetCoreProj.WebApi.Clients.Base
         protected async Task<T> GetAsync<T>(string url, CancellationToken cancel = default)
         {
             var response = await client.GetAsync(url, cancel).ConfigureAwait(false);
+            if (response.StatusCode == HttpStatusCode.NoContent) return default;
             return await response.
                 EnsureSuccessStatusCode().
                 Content.ReadFromJsonAsync<T>().
