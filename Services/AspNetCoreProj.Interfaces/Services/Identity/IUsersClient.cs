@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AspNetCoreProj.Interfaces.Services.Identity
 {
-    interface IUsersClient : 
+    public interface IUsersClient : 
         IUserRoleStore<User>,
         IUserPasswordStore<User>,
         IUserPhoneNumberStore<User>,

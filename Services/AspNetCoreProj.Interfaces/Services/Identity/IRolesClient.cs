@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AspNetCoreProj.Interfaces.Services.Identity
 {
-    interface IRolesClient : IRoleStore<Role>
+    public interface IRolesClient : IRoleStore<Role>
     {
     }
 }

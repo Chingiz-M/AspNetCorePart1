@@ -10,10 +10,11 @@ using System.Net.Http.Json;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+using AspNetCoreProj.Interfaces.Services.Identity;
 
 namespace AspNetCoreProj.WebApi.Clients.Identity
 {
-    public class UsersClient : BaseClient
+    public class UsersClient : BaseClient, IUsersClient
     {
         public UsersClient(HttpClient client) : base(client, WebApiAddresses.Identity.Users)
         {
