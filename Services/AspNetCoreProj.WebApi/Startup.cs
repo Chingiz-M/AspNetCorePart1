@@ -40,6 +40,8 @@ namespace AspNetCoreProj.WebApi
                     break;
             }
 
+            services.AddScoped<AspNetCoreProject.Data.ProjectDBInitiolizer>();
+
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<WebStoreDB>()
                 .AddDefaultTokenProviders();
@@ -60,6 +62,7 @@ namespace AspNetCoreProj.WebApi
                 opt.Lockout.MaxFailedAccessAttempts = 10;
                 opt.Lockout.DefaultLockoutTimeSpan = System.TimeSpan.FromMinutes(10);
             });
+
 
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddScoped<IProductData, SqlProductData>();
