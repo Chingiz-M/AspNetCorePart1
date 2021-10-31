@@ -24,7 +24,7 @@ namespace AspNetCoreProj.WebApi.Clients.Orders
                 Items = Cart.ToDTO(),
                 Order = OrderModel
             };
-            var response = await PostAsync($"{address}/{UserName}", model).ConfigureAwait(false);
+            var response = await PostAsync($"{Address}/{UserName}", model).ConfigureAwait(false);
             var order = await response.EnsureSuccessStatusCode()
                 .Content.ReadFromJsonAsync<OrderDTO>().ConfigureAwait(false);
             return order.FromDTO();
@@ -32,13 +32,13 @@ namespace AspNetCoreProj.WebApi.Clients.Orders
 
         public async Task<Order> GetOrderById(int id)
         {
-            var order = await GetAsync<OrderDTO>($"{address}/{id}").ConfigureAwait(false);
+            var order = await GetAsync<OrderDTO>($"{Address}/{id}").ConfigureAwait(false);
             return order.FromDTO();
         }
 
         public async Task<IEnumerable<Order>> GetUserOrders(string UserName)
         {
-            var orders = await GetAsync<IEnumerable<OrderDTO>>($"{address}/user/{UserName}").ConfigureAwait(false);
+            var orders = await GetAsync<IEnumerable<OrderDTO>>($"{Address}/user/{UserName}").ConfigureAwait(false);
             return orders.FromDTO();
         }
     }

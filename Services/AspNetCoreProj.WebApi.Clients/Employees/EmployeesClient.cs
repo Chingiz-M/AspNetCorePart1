@@ -16,7 +16,7 @@ namespace AspNetCoreProj.WebApi.Clients.Employees
 
         public int Add(Employee employee)
         {
-            var response = Post<Employee>(address, employee);
+            var response = Post<Employee>(Address, employee);
             var added_emp = response.Content.ReadFromJsonAsync<Employee>().Result;
             if (added_emp is null)
                 return -1;
@@ -26,26 +26,26 @@ namespace AspNetCoreProj.WebApi.Clients.Employees
 
         public bool Delete(int id)
         {
-            var response = Delete($"{address}/{id}");
+            var response = Delete($"{Address}/{id}");
             var res = response.IsSuccessStatusCode;
             return res;
         }
 
         public IEnumerable<Employee> GetAll()
         {
-            var response = Get<IEnumerable<Employee>>(address);
+            var response = Get<IEnumerable<Employee>>(Address);
             return response;
         }
 
         public Employee GetById(int id)
         {
-            var response = Get<Employee>($"{address}/{id}");
+            var response = Get<Employee>($"{Address}/{id}");
             return response;
         }
 
         public void Update(Employee employee)
         {
-            Put(address,employee);
+            Put(Address,employee);
         }
     }
 }

@@ -9,12 +9,12 @@ namespace AspNetCoreProj.WebApi.Clients.Base
     public abstract class BaseClient : IDisposable
     {
         protected HttpClient client;
-        protected string address;
+        protected string Address;
 
         protected BaseClient(HttpClient client, string Address)
         {
             this.client = client;
-            address = Address;
+            this.Address = Address;
         }
         protected T Get<T>(string url) => GetAsync<T>(url).Result;
         protected async Task<T> GetAsync<T>(string url, CancellationToken cancel = default)
