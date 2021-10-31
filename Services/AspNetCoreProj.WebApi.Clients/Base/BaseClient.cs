@@ -1,10 +1,11 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace AspNetCoreProj.WebApi.Clients.Base
 {
-    public abstract class BaseClient
+    public abstract class BaseClient : IDisposable
     {
         protected HttpClient client;
         protected string address;
@@ -40,6 +41,22 @@ namespace AspNetCoreProj.WebApi.Clients.Base
         {
             var response = await client.DeleteAsync(url).ConfigureAwait(false);
             return response;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+        private bool _Dispose;
+        public void Dispose(bool disposing)
+        {
+            if (_Dispose) return;
+            _Dispose = true;
+
+            if (disposing)
+            {
+
+            }
         }
     }
 }
