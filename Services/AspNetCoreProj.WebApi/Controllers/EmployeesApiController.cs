@@ -1,4 +1,5 @@
-﻿using AspNetCoreProject.Domain.Models;
+﻿using AspNetCoreProj.Interfaces;
+using AspNetCoreProject.Domain.Models;
 using AspNetCoreProject.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreProj.WebApi.Controllers
 {
-    [Route("api/employees")]
+    [Route(WebApiAddresses.Employees)]
     [ApiController]
     public class EmployeesApiController : ControllerBase
     {

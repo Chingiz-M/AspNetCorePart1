@@ -1,25 +1,22 @@
-﻿using AspNetCoreProj.WebApi.Clients.Base;
+﻿using AspNetCoreProj.Interfaces;
+using AspNetCoreProj.WebApi.Clients.Base;
 using AspNetCoreProject.Domain.Models;
 using AspNetCoreProject.Services.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AspNetCoreProj.WebApi.Clients.Employees
 {
     public class EmployeesClient : BaseClient, IEmployeesData
     {
-        public EmployeesClient(HttpClient client) : base(client, "api/employees")
+        public EmployeesClient(HttpClient client) : base(client, WebApiAddresses.Employees)
         {
         }
 
         public int Add(Employee employee)
         {
-            var response = Post<Employee>(address, employee);
+            var response = Post<Employee>(Address, employee);
             var added_emp = response.Content.ReadFromJsonAsync<Employee>().Result;
             if (added_emp is null)
                 return -1;
@@ -29,26 +26,26 @@ namespace AspNetCoreProj.WebApi.Clients.Employees
 
         public bool Delete(int id)
         {
-            var response = Delete($"{address}/{id}");
+            var response = Delete($"{Address}/{id}");
             var res = response.IsSuccessStatusCode;
             return res;
         }
 
         public IEnumerable<Employee> GetAll()
         {
-            var response = Get<IEnumerable<Employee>>(address);
+            var response = Get<IEnumerable<Employee>>(Address);
             return response;
         }
 
         public Employee GetById(int id)
         {
-            var response = Get<Employee>($"{address}/{id}");
+            var response = Get<Employee>($"{Address}/{id}");
             return response;
         }
 
         public void Update(Employee employee)
         {
-            Put(address,employee);
+            Put(Address,employee);
         }
     }
 }

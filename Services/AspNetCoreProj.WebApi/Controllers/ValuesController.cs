@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AspNetCoreProj.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreProj.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route(WebApiAddresses.Values)]
     [ApiController]
     public class ValuesController : ControllerBase
     {

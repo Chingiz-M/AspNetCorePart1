@@ -1,15 +1,12 @@
-﻿using AspNetCoreProject.Domain.DTO;
+﻿using AspNetCoreProj.Interfaces;
+using AspNetCoreProject.Domain.DTO;
 using AspNetCoreProject.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AspNetCoreProj.WebApi.Controllers
 {
-    [Route("api/orders")]
+    [Route(WebApiAddresses.Orders)]
     [ApiController]
     public class OrdersApiController : ControllerBase
     {

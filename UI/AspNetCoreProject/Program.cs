@@ -11,12 +11,6 @@ namespace AspNetCoreProject
         {
             var host_builder = CreateHostBuilder(args);
             var host = host_builder.Build();
-
-            using (var scope = host.Services.CreateScope())
-            {
-                var initializer = scope.ServiceProvider.GetRequiredService<AspNetCoreProject.Data.ProjectDBInitiolizer>();
-                await initializer.InitiolizeAsync();
-            }
             await host.RunAsync();
         }
 

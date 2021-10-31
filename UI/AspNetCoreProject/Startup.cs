@@ -1,24 +1,21 @@
+using AspNetCoreProj.Interfaces.TestApi;
+using AspNetCoreProj.WebApi.Clients.Employees;
+using AspNetCoreProj.WebApi.Clients.Identity;
+using AspNetCoreProj.WebApi.Clients.Orders;
+using AspNetCoreProj.WebApi.Clients.Products;
+using AspNetCoreProj.WebApi.Clients.Values;
+using AspNetCoreProject.Domain.Entities.Identity;
 using AspNetCoreProject.Infrastructure.Conventions;
 using AspNetCoreProject.Infrastructure.MiddleWare;
+using AspNetCoreProject.Services.In_Cookies;
 using AspNetCoreProject.Services.Interfaces;
-using AspNetCoreProject.DAL.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using AspNetCoreProject.Services.InMemory;
-using AspNetCoreProject.Services.InSql;
-using AspNetCoreProject.Services.In_Cookies;
-using AspNetCoreProject.Domain.Entities.Identity;
-using Microsoft.AspNetCore.Identity;
-using AspNetCoreProj.Interfaces.TestApi;
-using AspNetCoreProj.WebApi.Clients.Values;
-using AspNetCoreProj.WebApi.Clients.Employees;
-using AspNetCoreProj.WebApi.Clients.Products;
-using AspNetCoreProj.WebApi.Clients.Orders;
 
 namespace AspNetCoreProject
 {
@@ -30,23 +27,21 @@ namespace AspNetCoreProject
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var db_type = Configuration["Database"];
-
-            switch (db_type)
-            {
-                case "SqlServer":
-                    services.AddDbContext<WebStoreDB>(opt => opt.UseSqlServer(
-                        Configuration.GetConnectionString(db_type)));
-                    break;
-                case "Sqlite":
-                    services.AddDbContext<WebStoreDB>(opt => opt.UseSqlite(
-                        Configuration.GetConnectionString(db_type), o => o.MigrationsAssembly("AspNetCoreProject.DAL.SqlLite")));
-                    break;
-            }
-
             services.AddIdentity<User, Role>()
-                .AddEntityFrameworkStores<WebStoreDB>()
                 .AddDefaultTokenProviders();
+
+            services.AddHttpClient("ProjectWebApiIdentity", client => client.BaseAddress = new(Configuration["WebAPI"]))
+                .AddTypedClient<IUserStore<User>, UsersClient>()
+                .AddTypedClient<IUserRoleStore<User>, UsersClient>()
+                .AddTypedClient<IUserPasswordStore<User>, UsersClient>()
+                .AddTypedClient<IUserEmailStore<User>, UsersClient>()
+                .AddTypedClient<IUserPhoneNumberStore<User>, UsersClient>()
+                .AddTypedClient<IUserTwoFactorStore<User>, UsersClient>()
+                .AddTypedClient<IUserClaimStore<User>, UsersClient>()
+                .AddTypedClient<IUserLoginStore<User>, UsersClient>()
+                .AddTypedClient<IRoleStore<Role>, RolesClient>();
+
+
 
             services.Configure<IdentityOptions>(opt =>
             {
@@ -79,13 +74,8 @@ namespace AspNetCoreProject
                 opt.SlidingExpiration = true;
             });
 
-            services.AddTransient<AspNetCoreProject.Data.ProjectDBInitiolizer>();
-            //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
-            //services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<ICartService, InCookiesCartService>();
-            //services.AddScoped<IOrderService, SqlOrderService>();
             services.AddControllersWithViews(opt => opt.Conventions.Add(new TestControllerConventions())).AddRazorRuntimeCompilation();
-            //services.AddHttpClient<IValuesService, ValuesClient>(client => client.BaseAddress = new(Configuration["WebAPI"]));
             services.AddHttpClient("ProjectWebApi", client => client.BaseAddress = new(Configuration["WebAPI"]))
                 .AddTypedClient<IValuesService, ValuesClient>()
                 .AddTypedClient<IEmployeesData, EmployeesClient>()
