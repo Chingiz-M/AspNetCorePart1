@@ -9,10 +9,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.10" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.113" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\AspNetCoreProject.Domain\AspNetCoreProject.Domain.csproj" />
+    <ProjectReference Include="..\..\Common\WebStore.Logger\WebStore.Logger.csproj" />
     <ProjectReference Include="..\..\Data\AspNetCoreProject.DAL.SqlLite\AspNetCoreProject.DAL.SqlLite.csproj" />
     <ProjectReference Include="..\..\Data\AspNetCoreProject.DAL\AspNetCoreProject.DAL.csproj" />
     <ProjectReference Include="..\..\Services\AspNetCoreProj.Interfaces\AspNetCoreProj.Interfaces.csproj" />

@@ -29,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreProj.WebApi.Clien
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7B8E75AA-DAA3-42EC-8785-6AF4271EF7D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreProj.TestConsole", "Tests\AspNetCoreProj.TestConsole\AspNetCoreProj.TestConsole.csproj", "{5589F84A-5D3D-4D95-94CF-5EC9CDA42B09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreProj.TestConsole", "Tests\AspNetCoreProj.TestConsole\AspNetCoreProj.TestConsole.csproj", "{5589F84A-5D3D-4D95-94CF-5EC9CDA42B09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStore.Logger", "Common\WebStore.Logger\WebStore.Logger.csproj", "{BB2D6B7B-5E32-408A-9EED-A2874F33D7EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{5589F84A-5D3D-4D95-94CF-5EC9CDA42B09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5589F84A-5D3D-4D95-94CF-5EC9CDA42B09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5589F84A-5D3D-4D95-94CF-5EC9CDA42B09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB2D6B7B-5E32-408A-9EED-A2874F33D7EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB2D6B7B-5E32-408A-9EED-A2874F33D7EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB2D6B7B-5E32-408A-9EED-A2874F33D7EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB2D6B7B-5E32-408A-9EED-A2874F33D7EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{0742AEA7-4DA6-45FA-97A6-5756FA16F30D} = {FC416273-F7BB-4ADC-9637-C4196FA102E2}
 		{EC054F1C-C772-44DA-AE17-690ABCC2E779} = {FC416273-F7BB-4ADC-9637-C4196FA102E2}
 		{5589F84A-5D3D-4D95-94CF-5EC9CDA42B09} = {7B8E75AA-DAA3-42EC-8785-6AF4271EF7D7}
+		{BB2D6B7B-5E32-408A-9EED-A2874F33D7EB} = {9F756946-2314-4AD7-98D1-42606DA52712}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C7F7C329-14FE-4B54-9528-F2250A636CCB}

@@ -20,5 +20,6 @@ namespace AspNetCoreProject.Domain.Models
             Surname = surname;
             Age = age;
         }
+        public override string ToString() => $"{Id}:{Lastname} {Name} {Surname}";
     }
 }
