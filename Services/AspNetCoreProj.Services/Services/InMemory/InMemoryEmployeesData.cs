@@ -25,6 +25,7 @@ namespace AspNetCoreProject.Services.InMemory
 
             employee.Id = ++CurrentMaxId;
             TestData.Employees.Add(employee);
+            logger.LogInformation("Сотрудник {} успешно добавлен", employee.ToString());
             return employee.Id;
         }
 
@@ -34,6 +35,8 @@ namespace AspNetCoreProject.Services.InMemory
             if (delete_employee is null) return false;
 
             TestData.Employees.Remove(delete_employee);
+            logger.LogInformation("Сотрудник {} успешно удален", delete_employee.ToString());
+
             return true;
         }
 
@@ -52,6 +55,8 @@ namespace AspNetCoreProject.Services.InMemory
             update_employee.Lastname = employee.Lastname;
             update_employee.Surname = employee.Surname;
             update_employee.Age = employee.Age;
+            logger.LogInformation("Сотрудник {} успешно обновлен", update_employee.ToString());
+
         }
     }
 }
