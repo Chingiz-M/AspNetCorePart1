@@ -1,4 +1,7 @@
+using AspNetCoreProj.Interfaces.Services;
 using AspNetCoreProj.Interfaces.TestApi;
+using AspNetCoreProj.Services;
+using AspNetCoreProj.Services.Services.In_Cookies;
 using AspNetCoreProj.WebApi.Clients.Employees;
 using AspNetCoreProj.WebApi.Clients.Identity;
 using AspNetCoreProj.WebApi.Clients.Orders;
@@ -77,7 +80,12 @@ namespace AspNetCoreProject
                 opt.SlidingExpiration = true;
             });
 
-            services.AddScoped<ICartService, InCookiesCartService>();
+            //services.AddScoped<ICartService, InCookiesCartService>();
+
+            services.AddScoped<ICartStore, InCookiesCartStore>();
+            services.AddScoped<ICartService, CartService>();
+
+
             services.AddControllersWithViews(opt => opt.Conventions.Add(new TestControllerConventions())).AddRazorRuntimeCompilation();
             services.AddHttpClient("ProjectWebApi", client => client.BaseAddress = new(Configuration["WebAPI"]))
                 .AddTypedClient<IValuesService, ValuesClient>()

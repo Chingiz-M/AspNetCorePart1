@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace AspNetCoreProject.Controllers
 {
@@ -14,6 +15,8 @@ namespace AspNetCoreProject.Controllers
         public IActionResult Shop() => View();
         public IActionResult Status(string id)
         {
+            if (id is null)
+                throw new ArgumentNullException(nameof(id));
             switch (id)
             {
                 case "404": return View("Error404");
