@@ -20,7 +20,7 @@ namespace AspNetCoreProject.Controllers
             switch (id)
             {
                 case "404": return View("Error404");
-                default: return Content($"Status code -{id}");
+                default: return Content($"Status code - {id}");
             }
              
         }
