@@ -15,6 +15,7 @@ namespace AspNetCoreProject.Components
         }
         public IViewComponentResult Invoke(string BrandId)
         {
+            ViewBag.BrandId = int.TryParse(BrandId, out var id) ? id : (int?)null;
             var brands = productData.GetBrands().OrderBy(b => b.Order).Select(
                 b => new BrandViewModel
                 {
