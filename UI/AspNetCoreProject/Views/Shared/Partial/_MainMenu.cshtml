@@ -18,9 +18,9 @@
                 <li><a asp-controller="Blogs" asp-action="StoreBlog">Блог магазина</a></li>
             </ul>
         </li>
-        <li><a asp-controller="Home" asp-action="Error404">404</a></li>
-        <li><a asp-controller="Home" asp-action="ContactUs">Контакты</a></li>
-        <li><a asp-controller="Employees" asp-action="Index">Сотрудники</a></li>
+        <li><a ws-is-active-route asp-controller="Home" asp-action="Error404">404</a></li>
+        <li><a ws-is-active-route asp-controller="Home" asp-action="ContactUs">Контакты</a></li>
+        <li><a ws-is-active-route asp-controller="Employees" asp-action="Index">Сотрудники</a></li>
         <li><a asp-controller="WebApi" asp-action="Index" class="@IsActive("WebApi")">WebApi</a></li>
     </ul>
 </div>
