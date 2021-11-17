@@ -14,7 +14,7 @@ namespace AspNetCoreProject.Components
         {
             productData = ProductData;
         }
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(string SectionId)
         {
             var sections = productData.GetSections();
 

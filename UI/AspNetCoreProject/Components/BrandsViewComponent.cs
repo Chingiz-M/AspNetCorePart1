@@ -13,7 +13,7 @@ namespace AspNetCoreProject.Components
         {
             productData = ProductData;
         }
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(string BrandId)
         {
             var brands = productData.GetBrands().OrderBy(b => b.Order).Select(
                 b => new BrandViewModel
