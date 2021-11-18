@@ -1,5 +1,6 @@
 ﻿using AspNetCoreProject.Domain.ViewModels;
 using AspNetCoreProject.Services.Interfaces;
+using AspNetCoreProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,24 @@ namespace AspNetCoreProject.Components
         {
             productData = ProductData;
         }
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(string SectionId)
         {
+            var section_id = int.TryParse(SectionId, out var id) ? id : (int?)null;
+
+            var sections = GetSections(section_id, out var parent_section_id);
+
+
+            return View(new SelectableSectionsViewModel
+            {
+                Sections = sections,
+                SectionId = section_id,
+                ParentSectionId = parent_section_id,
+            });
+        }
+
+        private IEnumerable<SectionViewModel> GetSections(int? SectionId, out int? ParentSectionId)
+        {
+            ParentSectionId = null;
             var sections = productData.GetSections();
 
             var parent_sections = sections.Where(s => s.ParentId is null);
@@ -28,11 +45,15 @@ namespace AspNetCoreProject.Components
                  Order = s.Order,
              }).ToList();
 
-            foreach(var parent_section in parent_sections_view)
+            foreach (var parent_section in parent_sections_view)
             {
                 var child_sections = sections.Where(s => s.ParentId == parent_section.Id);
 
                 foreach (var child in child_sections)
+                {
+                    if (child.Id == SectionId)
+                        ParentSectionId = child.ParentId;
+
                     parent_section.ChildSections.Add(new SectionViewModel
                     {
                         Id = child.Id,
@@ -40,13 +61,14 @@ namespace AspNetCoreProject.Components
                         Order = child.Order,
                         Parent = parent_section,
                     });
+                }
+                    
 
                 parent_section.ChildSections.Sort((a, b) => Comparer<int>.Default.Compare(a.Order, b.Order));
             }
             parent_sections_view.Sort((a, b) => Comparer<int>.Default.Compare(a.Order, b.Order));
 
-
-            return View(parent_sections_view);
-        } 
+            return parent_sections_view;
+        }
     }
 }

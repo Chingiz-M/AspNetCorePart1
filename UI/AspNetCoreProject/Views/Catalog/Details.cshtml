@@ -7,6 +7,7 @@
 <section>
     <div class="container">
         <div class="row">
+            <vc:bread-crumbs />
             <div class="col-sm-3">
                 <partial name="Partial\_LeftSideBar" />
             </div>
@@ -60,7 +61,7 @@
                                 <span>@Model.Price.ToString("C")</span>
                                 <label>Количество:</label>
                                 <input type="text" value="3" />
-                                <a class="btn btn-default cart" asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id" >
+                                <a class="btn btn-default cart" asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
                                     <i class="fa fa-shopping-cart"></i>
                                     В корзину
                                 </a>
